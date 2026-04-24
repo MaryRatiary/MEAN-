@@ -1,0 +1,118 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="logo">
+      <h2>�� PhoneStore</h2>
+    </div>
+    <ul class="nav-menu">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a></li>
+      <li><a routerLink="/products" routerLinkActive="active">Téléphones</a></li>
+      <li><a routerLink="/add" routerLinkActive="active" class="btn-add">+ Ajouter</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Bienvenue sur PhoneStore</h1>
+    <p>Découvrez les meilleurs téléphones au meilleur prix</p>
+    <button class="btn-hero" (click)="navigateToProducts()">Voir nos téléphones</button>
+  </div>
+  <div class="hero-image">
+    <div class="phone-mockup">��</div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+  <div class="feature-card">
+    <div class="feature-icon">🚚</div>
+    <h3>Livraison Rapide</h3>
+    <p>Livraison en 24-48h partout en France</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🛡️</div>
+    <h3>Garantie</h3>
+    <p>Tous les produits garantis 2 ans</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">💰</div>
+    <h3>Meilleurs Prix</h3>
+    <p>Prix compétitifs avec paiement sécurisé</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🔒</div>
+    <h3>Paiement Sécurisé</h3>
+    <p>Vos données sont protégées</p>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured">
+  <div class="section-header">
+    <h2>Téléphones en Vedette</h2>
+    <p>Découvrez nos produits les plus populaires</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Chargement des produits...
+  </div>
+
+  <div class="featured-grid">
+    <div *ngFor="let product of featuredProducts" class="product-card-featured">
+      <div class="product-image">
+        <div class="image-placeholder">📱</div>
+      </div>
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p class="category">{{ product.category }}</p>
+        <p class="description">{{ product.description | slice:0:80 }}...</p>
+        <div class="product-details">
+          <span class="price">{{ product.price | currency:'EUR':'symbol':'1.0-0' }}</span>
+          <span class="stock" [ngClass]="{'in-stock': product.quantity > 0, 'out-stock': product.quantity === 0}">
+            {{ product.quantity > 0 ? 'En stock' : 'Rupture' }}
+          </span>
+        </div>
+        <button class="btn-view" (click)="viewProduct(product._id)">Voir Détails</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="featuredProducts.length === 0 && !loading" class="no-products">
+    <p>Aucun produit disponible pour le moment</p>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+  <h2>Prêt à trouver votre téléphone idéal ?</h2>
+  <p>Parcourez notre catalogue complet et trouvez le modèle qui vous convient</p>
+  <button class="btn-cta" (click)="navigateToProducts()">Voir tous les téléphones</button>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>À propos</h4>
+      <p>PhoneStore est votre boutique en ligne pour les meilleurs téléphones du marché.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>Email: contact&#64;phonestore.com</p>
+      <p>Tel: +33 1 23 45 67 89</p>
+    </div>
+    <div class="footer-section">
+      <h4>Liens</h4>
+      <ul>
+        <li><a routerLink="/products">Produits</a></li>
+        <li><a href="#">Conditions</a></li>
+        <li><a href="#">Politique</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 PhoneStore. Tous droits réservés.</p>
+  </div>
+</footer>

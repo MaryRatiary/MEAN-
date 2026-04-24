@@ -1,0 +1,171 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="logo">
+      <h2>📱 PhoneStore</h2>
+    </div>
+    <ul class="nav-menu">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a></li>
+      <li><a routerLink="/products" routerLinkActive="active">Téléphones</a></li>
+      <li><a routerLink="/add" routerLinkActive="active" class="btn-add">+ Ajouter</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a routerLink="/">Accueil</a> / <a routerLink="/products">Téléphones</a> / <span>Détails</span>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Chargement du produit...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+    <button (click)="goBack()" class="btn-close">Retour</button>
+  </div>
+
+  <div *ngIf="product && !loading" class="product-details">
+    <div class="details-grid">
+      <!-- Left Column - Image -->
+      <div class="image-column">
+        <div class="main-image">
+          <img 
+            *ngIf="product.image; else noImage" 
+            [src]="product.image" 
+            [alt]="product.name"
+            class="product-img"
+            onerror="this.style.display='none'">
+          <ng-template #noImage>
+            <div class="phone-image-large">📱</div>
+          </ng-template>
+        </div>
+        <div class="image-thumbnails">
+          <div class="thumbnail" *ngIf="product.image">
+            <img [src]="product.image" [alt]="product.name" class="thumb-img">
+          </div>
+          <div class="thumbnail" *ngIf="!product.image">📱</div>
+          <div class="thumbnail">📱</div>
+          <div class="thumbnail">📱</div>
+        </div>
+      </div>
+
+      <!-- Right Column - Details -->
+      <div class="info-column">
+        <div class="product-header">
+          <span class="category-tag">{{ product.category }}</span>
+          <h1>{{ product.name }}</h1>
+        </div>
+
+        <!-- Price and Stock -->
+        <div class="price-section">
+          <div class="price-display">
+            <span class="currency">€</span>
+            <span class="amount">{{ product.price | number:'1.0-0' }}</span>
+            <span class="period">/unité</span>
+          </div>
+          <div class="stock-status" [ngClass]="{'in-stock': product.quantity > 0, 'out-stock': product.quantity === 0}">
+            <span class="status-icon">{{ product.quantity > 0 ? '✓' : '✗' }}</span>
+            {{ product.quantity > 0 ? product.quantity + ' en stock' : 'Rupture de stock' }}
+          </div>
+        </div>
+
+        <!-- Rating -->
+        <div *ngIf="product.rating" class="rating-section">
+          <span class="stars">{{ getStarRating() }}</span>
+          <span class="rating-text">{{ product.rating }}/5 ({{ getRandomReviewCount() }} avis)</span>
+        </div>
+
+        <!-- Description -->
+        <div class="description-section">
+          <h3>Description</h3>
+          <p>{{ product.description }}</p>
+        </div>
+
+        <!-- Specifications -->
+        <div class="specs-section">
+          <h3>Caractéristiques</h3>
+          <div class="specs-grid">
+            <div class="spec-item">
+              <span class="spec-name">Catégorie</span>
+              <span class="spec-value">{{ product.category }}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-name">Disponibilité</span>
+              <span class="spec-value">{{ product.quantity > 0 ? 'En stock' : 'Non disponible' }}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-name">Ref. Produit</span>
+              <span class="spec-value">{{ product._id?.substring(0, 8) }}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-name">Garantie</span>
+              <span class="spec-value">2 ans</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quantity and Actions -->
+        <div class="purchase-section">
+          <div class="quantity-selector">
+            <label>Quantité</label>
+            <div class="quantity-control">
+              <button class="qty-btn" (click)="decreaseQuantity()" [disabled]="quantity <= 1">−</button>
+              <input type="number" [(ngModel)]="quantity" class="qty-input" min="1" [max]="product.quantity">
+              <button class="qty-btn" (click)="increaseQuantity()" [disabled]="quantity >= product.quantity">+</button>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button 
+              class="btn btn-primary" 
+              (click)="buyNow()"
+              [disabled]="product.quantity === 0">
+              💳 Acheter Maintenant
+            </button>
+            <button 
+              class="btn btn-secondary" 
+              (click)="addToCart()"
+              [disabled]="product.quantity === 0">
+              🛒 Ajouter au Panier
+            </button>
+          </div>
+
+          <button class="btn btn-outline" (click)="goBack()">
+            ← Retour à la liste
+          </button>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="additional-info">
+          <div class="info-item">
+            <span class="info-icon">🚚</span>
+            <span>Livraison gratuite à partir de 50€</span>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">🔄</span>
+            <span>Retour gratuit pendant 14 jours</span>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">🔒</span>
+            <span>Paiement sécurisé garanti</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!product && !loading && !error" class="no-product">
+    <p>Produit non trouvé</p>
+    <button (click)="goBack()" class="btn btn-primary">Retour</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2024 PhoneStore. Tous droits réservés.</p>
+  </div>
+</footer>

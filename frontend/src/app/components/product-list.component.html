@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>Liste des Produits</h1>
+  
+  <div *ngIf="loading" class="alert alert-info">
+    Chargement des produits...
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div class="products-grid">
+    <div *ngFor="let product of products" class="product-card">
+      <div class="product-header">
+        <h3>{{ product.name }}</h3>
+        <span class="badge">{{ product.category }}</span>
+      </div>
+      
+      <p class="description">{{ product.description }}</p>
+      
+      <div class="product-info">
+        <div class="price">{{ product.price | currency }}</div>
+        <div class="quantity">Stock: {{ product.quantity }}</div>
+        <div class="rating" *ngIf="product.rating">⭐ {{ product.rating }}/5</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" [routerLink]="['/edit', product._id]">
+          Modifier
+        </button>
+        <button class="btn btn-danger" (click)="deleteProduct(product._id)">
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="products.length === 0 && !loading" class="no-products">
+    <p>Aucun produit disponible</p>
+  </div>
+
+  <div class="add-product">
+    <button class="btn btn-success" routerLink="/add">
+      + Ajouter un Produit
+    </button>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="logo">
+      <h2>📱 PhoneStore</h2>
+    </div>
+    <ul class="nav-menu">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a></li>
+      <li><a routerLink="/products" routerLinkActive="active">Téléphones</a></li>
+      <li><a routerLink="/add" routerLinkActive="active" class="btn-add">+ Ajouter</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Catalogue Section -->
+<div class="container">
+  <div class="page-header">
+    <h1>Nos Téléphones</h1>
+    <p>Découvrez notre sélection complète de téléphones mobiles</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <h3>Filtrer par catégorie</h3>
+    <div class="category-filters">
+      <button 
+        *ngFor="let category of categories"
+        class="filter-btn"
+        [class.active]="selectedCategory === category"
+        (click)="filterByCategory(category)">
+        {{ category }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Chargement des produits...</p>
+  </div>
+
+  <!-- Products Grid -->
+  <div *ngIf="!loading" class="products-container">
+    <div *ngIf="filteredProducts.length === 0" class="no-products">
+      <p>Aucun produit disponible dans cette catégorie</p>
+    </div>
+
+    <div class="products-grid">
+      <div *ngFor="let product of filteredProducts" class="phone-card">
+        <div class="card-header">
+          <div class="image-section">
+            <img 
+              *ngIf="product.image; else defaultImage"
+              [src]="product.image"
+              [alt]="product.name"
+              class="phone-image"
+              onerror="this.style.display='none'">
+            <ng-template #defaultImage>
+              <div class="phone-image-emoji">📱</div>
+            </ng-template>
+          </div>
+          <span class="category-badge">{{ product.category }}</span>
+        </div>
+
+        <div class="card-body">
+          <h3 class="product-name">{{ product.name }}</h3>
+          
+          <p class="product-description">{{ product.description | slice:0:100 }}...</p>
+
+          <div class="product-specs">
+            <div class="spec">
+              <span class="spec-label">Prix</span>
+              <span class="spec-value price">{{ product.price | currency:'EUR':'symbol':'1.0-0' }}</span>
+            </div>
+            <div class="spec">
+              <span class="spec-label">Stock</span>
+              <span class="spec-value" [ngClass]="{'in-stock': product.quantity > 0, 'out-stock': product.quantity === 0}">
+                {{ product.quantity > 0 ? product.quantity + ' unités' : 'Rupture' }}
+              </span>
+            </div>
+          </div>
+
+          <div *ngIf="product.rating" class="rating">
+            <span class="stars">⭐ {{ product.rating }}/5</span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <button class="btn btn-info" (click)="viewProduct(product._id)">
+            Voir Détails
+          </button>
+          <button class="btn btn-edit" (click)="editProduct(product._id)">
+            ✏️ Modifier
+          </button>
+          <button class="btn btn-delete" (click)="deleteProduct(product._id)">
+            🗑️ Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Product Button -->
+  <div class="add-product-section">
+    <button class="btn-add-product" routerLink="/add">
+      + Ajouter un Nouveau Téléphone
+    </button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2024 PhoneStore. Tous droits réservés.</p>
+  </div>
+</footer>
