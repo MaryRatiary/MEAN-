@@ -1,0 +1,19 @@
+<header>
+  <div class="container flex justify-between items-center">
+    <div>
+      <a routerLink="/" class="h3" style="margin-bottom: 0;">MEAN STORE</a>
+    </div>
+    <nav class="flex items-center">
+      <a routerLink="/" class="nav-link">Shop</a>
+      <a routerLink="/cart" class="nav-link">Cart</a>
+      <ng-container *ngIf="!isLoggedIn()">
+        <a routerLink="/login" class="nav-link">Login</a>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn()">
+        <a routerLink="/profile" class="nav-link">Account</a>
+        <a *ngIf="isAdmin()" routerLink="/admin" class="nav-link">Admin</a>
+        <a (click)="logout()" class="nav-link" style="cursor: pointer;">Logout</a>
+      </ng-container>
+    </nav>
+  </div>
+</header>

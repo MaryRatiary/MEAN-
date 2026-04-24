@@ -1,0 +1,61 @@
+<section class="container mt-4">
+  <div class="flex justify-between items-center mb-4">
+    <h2>Dashboard</h2>
+    <a (click)="logout()" class="nav-link" style="cursor: pointer; margin-left: 0;">Logout</a>
+  </div>
+
+  <div class="grid grid-cols-4 mb-4">
+    <div class="card">
+      <p style="font-size: 0.75rem; text-transform: uppercase;">Total Sales</p>
+      <h3 style="margin-bottom: 0;">{{ stats.totalSales | currency:'EUR' }}</h3>
+    </div>
+    <div class="card">
+      <p style="font-size: 0.75rem; text-transform: uppercase;">Orders</p>
+      <h3 style="margin-bottom: 0;">{{ stats.totalOrders }}</h3>
+    </div>
+    <div class="card">
+      <p style="font-size: 0.75rem; text-transform: uppercase;">Customers</p>
+      <h3 style="margin-bottom: 0;">{{ stats.totalUsers }}</h3>
+    </div>
+    <div class="card">
+      <p style="font-size: 0.75rem; text-transform: uppercase;">Products</p>
+      <h3 style="margin-bottom: 0;">{{ stats.totalProducts }}</h3>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 mt-4">
+    <div class="card">
+      <h3>Recent Orders</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of stats.recentOrders">
+            <td style="font-size: 0.625rem;">{{ order._id }}</td>
+            <td>{{ order.user?.name }}</td>
+            <td>{{ order.totalPrice | currency:'EUR' }}</td>
+            <td>
+              <span class="badge" [style.background]="order.isPaid ? 'black' : '#eee'" [style.color]="order.isPaid ? 'white' : 'black'">
+                {{ order.isPaid ? 'Paid' : 'Pending' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="flex justify-between items-center mb-4">
+        <h3>Product Management</h3>
+        <button class="btn btn-black" style="padding: 0.5rem 1rem; font-size: 0.625rem;" (click)="addProduct()">Add Product</button>
+      </div>
+      <app-product-list></app-product-list>
+    </div>
+  </div>
+</section>

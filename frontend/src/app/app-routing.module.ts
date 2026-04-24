@@ -9,11 +9,17 @@ import { ProductFormComponent } from './components/product-form.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductCatalogComponent },
-  { path: 'product-details/:id', component: ProductDetailsComponent },
-  { path: 'add', component: ProductFormComponent },
-  { path: 'edit/:id', component: ProductFormComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'admin/products/new', component: ProductFormComponent },
+  { path: 'admin/products/edit/:id', component: ProductFormComponent },
   { path: '**', redirectTo: '' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

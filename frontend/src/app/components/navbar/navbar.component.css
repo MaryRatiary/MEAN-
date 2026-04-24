@@ -1,0 +1,4 @@
+/* Navbar specific styles if needed, but mostly using global classes */
+:host {
+  display: block;
+}

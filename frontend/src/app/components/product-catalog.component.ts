@@ -11,10 +11,9 @@ import { Product } from '../models/product.model';
 export class ProductCatalogComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
+  categories: string[] = [];
   loading = false;
   error = '';
-  selectedCategory = 'Tous';
-  categories: string[] = ['Tous'];
 
   constructor(
     private productService: ProductService,
@@ -43,43 +42,20 @@ export class ProductCatalogComponent implements OnInit {
   }
 
   extractCategories(): void {
-    const uniqueCategories = [...new Set(this.products.map(p => p.category))];
-    this.categories = ['Tous', ...uniqueCategories];
+    this.categories = [...new Set(this.products.map(p => p.category))];
   }
 
-  filterByCategory(category: string): void {
-    this.selectedCategory = category;
-    if (category === 'Tous') {
+  onCategoryChange(event: any): void {
+    const category = event.target.value;
+    if (category === '') {
       this.filteredProducts = this.products;
     } else {
       this.filteredProducts = this.products.filter(p => p.category === category);
     }
   }
 
-  viewProduct(id: string | undefined): void {
-    if (id) {
-      this.router.navigate(['/product-details', id]);
-    }
-  }
-
-  deleteProduct(id: string | undefined): void {
-    if (!id) return;
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
-      this.productService.deleteProduct(id).subscribe({
-        next: () => {
-          this.loadProducts();
-        },
-        error: (err) => {
-          this.error = 'Erreur lors de la suppression';
-          console.error(err);
-        }
-      });
-    }
-  }
-
-  editProduct(id: string | undefined): void {
-    if (id) {
-      this.router.navigate(['/edit', id]);
-    }
+  resetFilter(): void {
+    this.filteredProducts = this.products;
   }
 }
+

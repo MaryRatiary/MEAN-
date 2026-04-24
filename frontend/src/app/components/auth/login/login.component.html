@@ -1,0 +1,17 @@
+<section class="container" style="max-width: 400px; margin: 4rem auto;">
+  <h2 class="text-center">Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email" placeholder="email@example.com">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" placeholder="******">
+    </div>
+    <button type="submit" class="btn btn-black btn-block" [disabled]="loginForm.invalid">Sign In</button>
+  </form>
+  <div class="text-center mt-20">
+    <p style="font-size: 0.75rem;">Don't have an account? <a routerLink="/register">Register</a></p>
+  </div>
+</section>

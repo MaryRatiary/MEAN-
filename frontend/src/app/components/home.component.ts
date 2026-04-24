@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 
 @Component({
@@ -9,37 +8,16 @@ import { ProductService } from '../services/product.service';
 })
 export class HomeComponent implements OnInit {
   featuredProducts: any[] = [];
-  loading = false;
 
-  constructor(
-    private productService: ProductService,
-    private router: Router
-  ) { }
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.loadFeaturedProducts();
-  }
-
-  loadFeaturedProducts(): void {
-    this.loading = true;
     this.productService.getAllProducts().subscribe({
-      next: (response) => {
-        // Limiter à 3 produits principaux
-        this.featuredProducts = response.data.slice(0, 3);
-        this.loading = false;
+      next: (res: any) => {
+        this.featuredProducts = res.data.slice(0, 4);
       },
-      error: (err) => {
-        console.error(err);
-        this.loading = false;
-      }
+      error: (err) => console.error(err)
     });
   }
-
-  navigateToProducts(): void {
-    this.router.navigate(['/products']);
-  }
-
-  viewProduct(id: string): void {
-    this.router.navigate(['/product-details', id]);
-  }
 }
+

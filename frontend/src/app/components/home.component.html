@@ -1,118 +1,29 @@
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="navbar-container">
-    <div class="logo">
-      <h2>�� PhoneStore</h2>
+<section class="hero text-center" style="padding: 8rem 0; border-bottom: var(--border);">
+  <div class="container">
+    <h1 style="font-size: 4rem; margin-bottom: 2rem;">Minimalist. MEAN.</h1>
+    <p style="max-width: 600px; margin: 0 auto 3rem; font-size: 1.25rem; font-weight: 300;">
+      A monochromatic exploration of the MEAN stack. Pure design, robust logic.
+    </p>
+    <a routerLink="/products" class="btn btn-black btn-block" style="max-width: 300px; margin: 0 auto;">Explore Collection</a>
+  </div>
+</section>
+
+<section class="featured-products mt-4">
+  <div class="container">
+    <div class="flex justify-between items-center mb-4">
+      <h3>Featured Selection</h3>
+      <a routerLink="/products" class="nav-link" style="margin-left: 0;">View All</a>
     </div>
-    <ul class="nav-menu">
-      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a></li>
-      <li><a routerLink="/products" routerLinkActive="active">Téléphones</a></li>
-      <li><a routerLink="/add" routerLinkActive="active" class="btn-add">+ Ajouter</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- Hero Section -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Bienvenue sur PhoneStore</h1>
-    <p>Découvrez les meilleurs téléphones au meilleur prix</p>
-    <button class="btn-hero" (click)="navigateToProducts()">Voir nos téléphones</button>
-  </div>
-  <div class="hero-image">
-    <div class="phone-mockup">��</div>
-  </div>
-</section>
-
-<!-- Features Section -->
-<section class="features">
-  <div class="feature-card">
-    <div class="feature-icon">🚚</div>
-    <h3>Livraison Rapide</h3>
-    <p>Livraison en 24-48h partout en France</p>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon">🛡️</div>
-    <h3>Garantie</h3>
-    <p>Tous les produits garantis 2 ans</p>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon">💰</div>
-    <h3>Meilleurs Prix</h3>
-    <p>Prix compétitifs avec paiement sécurisé</p>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon">🔒</div>
-    <h3>Paiement Sécurisé</h3>
-    <p>Vos données sont protégées</p>
-  </div>
-</section>
-
-<!-- Featured Products Section -->
-<section class="featured">
-  <div class="section-header">
-    <h2>Téléphones en Vedette</h2>
-    <p>Découvrez nos produits les plus populaires</p>
-  </div>
-
-  <div *ngIf="loading" class="loading">
-    Chargement des produits...
-  </div>
-
-  <div class="featured-grid">
-    <div *ngFor="let product of featuredProducts" class="product-card-featured">
-      <div class="product-image">
-        <div class="image-placeholder">📱</div>
-      </div>
-      <div class="product-info">
-        <h3>{{ product.name }}</h3>
-        <p class="category">{{ product.category }}</p>
-        <p class="description">{{ product.description | slice:0:80 }}...</p>
-        <div class="product-details">
-          <span class="price">{{ product.price | currency:'EUR':'symbol':'1.0-0' }}</span>
-          <span class="stock" [ngClass]="{'in-stock': product.quantity > 0, 'out-stock': product.quantity === 0}">
-            {{ product.quantity > 0 ? 'En stock' : 'Rupture' }}
-          </span>
+    <div class="grid grid-cols-4">
+      <div *ngFor="let product of featuredProducts" class="card">
+        <div style="background: var(--gray-50); height: 300px; margin-bottom: 1.5rem; display: flex; items-center; justify-content: center; border: var(--border-light);">
+          <img *ngIf="product.image" [src]="product.image" [alt]="product.name" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+          <span *ngIf="!product.image" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--gray-200);">No Image</span>
         </div>
-        <button class="btn-view" (click)="viewProduct(product._id)">Voir Détails</button>
+        <h4>{{ product.name }}</h4>
+        <p style="font-size: 1rem; font-weight: 700;">{{ product.price | currency:'EUR' }}</p>
+        <a [routerLink]="['/products', product._id]" class="btn btn-block">View Details</a>
       </div>
     </div>
   </div>
-
-  <div *ngIf="featuredProducts.length === 0 && !loading" class="no-products">
-    <p>Aucun produit disponible pour le moment</p>
-  </div>
 </section>
-
-<!-- CTA Section -->
-<section class="cta">
-  <h2>Prêt à trouver votre téléphone idéal ?</h2>
-  <p>Parcourez notre catalogue complet et trouvez le modèle qui vous convient</p>
-  <button class="btn-cta" (click)="navigateToProducts()">Voir tous les téléphones</button>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-section">
-      <h4>À propos</h4>
-      <p>PhoneStore est votre boutique en ligne pour les meilleurs téléphones du marché.</p>
-    </div>
-    <div class="footer-section">
-      <h4>Contact</h4>
-      <p>Email: contact&#64;phonestore.com</p>
-      <p>Tel: +33 1 23 45 67 89</p>
-    </div>
-    <div class="footer-section">
-      <h4>Liens</h4>
-      <ul>
-        <li><a routerLink="/products">Produits</a></li>
-        <li><a href="#">Conditions</a></li>
-        <li><a href="#">Politique</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2024 PhoneStore. Tous droits réservés.</p>
-  </div>
-</footer>
