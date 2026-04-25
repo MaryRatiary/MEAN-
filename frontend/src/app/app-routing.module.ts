@@ -5,6 +5,11 @@ import { ProductListComponent } from './components/product-list.component';
 import { ProductCatalogComponent } from './components/product-catalog.component';
 import { ProductDetailsComponent } from './components/product-details.component';
 import { ProductFormComponent } from './components/product-form.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AdminDashboardComponent } from './components/admin/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

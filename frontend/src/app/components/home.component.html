@@ -1,29 +1,67 @@
-<section class="hero text-center" style="padding: 8rem 0; border-bottom: var(--border);">
-  <div class="container">
-    <h1 style="font-size: 4rem; margin-bottom: 2rem;">Minimalist. MEAN.</h1>
-    <p style="max-width: 600px; margin: 0 auto 3rem; font-size: 1.25rem; font-weight: 300;">
-      A monochromatic exploration of the MEAN stack. Pure design, robust logic.
-    </p>
-    <a routerLink="/products" class="btn btn-black btn-block" style="max-width: 300px; margin: 0 auto;">Explore Collection</a>
-  </div>
-</section>
+<section class="hero">
+  <div class="container hero-wrap">
 
-<section class="featured-products mt-4">
-  <div class="container">
-    <div class="flex justify-between items-center mb-4">
-      <h3>Featured Selection</h3>
-      <a routerLink="/products" class="nav-link" style="margin-left: 0;">View All</a>
-    </div>
-    <div class="grid grid-cols-4">
-      <div *ngFor="let product of featuredProducts" class="card">
-        <div style="background: var(--gray-50); height: 300px; margin-bottom: 1.5rem; display: flex; items-center; justify-content: center; border: var(--border-light);">
-          <img *ngIf="product.image" [src]="product.image" [alt]="product.name" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-          <span *ngIf="!product.image" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--gray-200);">No Image</span>
+    <div class="hero-text">
+      <span class="hero-badge">Boutique Apple Premium</span>
+
+      <h1>
+        Achetez la Nouvelle <br>
+        Collection iPhone
+      </h1>
+
+      <p class="hero-desc">
+        Découvrez la dernière génération d’iPhone avec un design élégant,
+        des appareils photo puissants, une grande autonomie et des performances haut de gamme.
+        Choisissez parmi les modèles iPhone Pro, Pro Max et versions classiques.
+      </p>
+
+      <div class="hero-features">
+        <div>✓ Livraison Rapide</div>
+        <div>✓ Paiement Sécurisé</div>
+        <div>✓ Qualité Officielle</div>
+        <div>✓ Garantie Incluse</div>
+      </div>
+
+      <div class="hero-actions">
+        <a routerLink="/products" class="btn btn-black">Acheter iPhone</a>
+        <a routerLink="/products" class="btn btn-light">Voir la Collection</a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <h3>12K+</h3>
+          <p>Clients Satisfaits</p>
         </div>
-        <h4>{{ product.name }}</h4>
-        <p style="font-size: 1rem; font-weight: 700;">{{ product.price | currency:'EUR' }}</p>
-        <a [routerLink]="['/products', product._id]" class="btn btn-block">View Details</a>
+
+        <div>
+          <h3>50+</h3>
+          <p>Modèles Disponibles</p>
+        </div>
+
+        <div>
+          <h3>24H</h3>
+          <p>Expédition Rapide</p>
+        </div>
       </div>
     </div>
+
+    <div class="hero-images">
+
+      <div class="phone-card large">
+        <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=900" alt="iPhone">
+      </div>
+
+      <div class="small-grid">
+        <div class="phone-card">
+          <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800" alt="iPhone">
+        </div>
+
+        <div class="phone-card">
+          <img src="https://images.unsplash.com/photo-1603898037225-1c1d5a4b2f90?w=800" alt="iPhone">
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </section>

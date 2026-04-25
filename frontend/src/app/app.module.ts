@@ -12,11 +12,11 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AdminDashboardComponent } from './components/admin/dashboard/dashboard.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { ProductFormComponent } from './components/product-form/product-form.component';
-import { HomeComponent } from './components/home/home.component';
-import { ProductCatalogComponent } from './components/product-catalog/product-catalog.component';
-import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductListComponent } from './components/product-list.component';
+import { ProductFormComponent } from './components/product-form.component';
+import { HomeComponent } from './components/home.component';
+import { ProductCatalogComponent } from './components/product-catalog.component';
+import { ProductDetailsComponent } from './components/product-details.component';
 
 @NgModule({
   declarations: [
