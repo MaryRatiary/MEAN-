@@ -1,18 +1,24 @@
-<header>
-  <div class="container flex justify-between items-center">
-    <div>
-      <a routerLink="/" class="h3" style="margin-bottom: 0;">MEAN STORE</a>
-    </div>
-    <nav class="flex items-center">
-      <a routerLink="/" class="nav-link">Shop</a>
-      <a routerLink="/cart" class="nav-link">Cart</a>
-      <ng-container *ngIf="!isLoggedIn()">
-        <a routerLink="/login" class="nav-link">Login</a>
-      </ng-container>
+<header class="fixed top-0 left-0 w-full z-50 glass h-12 flex items-center">
+  <div class="max-w-[1000px] mx-auto w-full px-4 flex items-center justify-between">
+    <a routerLink="/" class="text-black/80 hover:text-black transition-colors">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 170 170"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.197-2.12-9.973-3.17-14.34-3.17-4.58 0-9.492 1.05-14.746 3.17-5.262 2.13-9.501 3.24-12.742 3.35-5.202.12-10.035-1.93-14.512-6.12-3.034-2.8-6.964-7.5-11.791-14.11-5.066-7.03-9.109-15.19-12.119-24.47-3.197-9.98-4.802-20.13-4.802-30.47 0-14.81 3.387-27.31 10.167-37.5 5.386-8.1 12.693-12.2 21.913-12.3 4.485-.1 9.742 1.34 15.718 4.31 4.339 2.16 8.214 3.24 11.601 3.24 2.758 0 6.936-1.31 12.544-3.95 7.115-3.37 13.415-4.76 18.905-4.16 12.732 1.35 22.464 6.35 29.176 14.99-10.923 6.6-16.331 16.21-16.223 28.82.108 10.34 3.743 19.03 10.903 26.1l1.04 1.03zM116.623 2c4.646.567 9.167 2.366 13.563 5.398 4.397 3.032 7.757 7.025 10.077 11.977 2.32 4.953 3.318 10.213 2.997 15.778-.113.84-.19 1.68-.23 2.52-5.852.217-11.512-1.705-16.033-5.26-4.521-3.555-7.907-8.13-10.158-13.725-2.251-5.594-3.033-11.451-2.343-17.57z"></path></svg>
+    </a>
+
+    <nav class="flex items-center space-x-6 text-[11px] font-normal tracking-tight text-black/80">
+      <a routerLink="/" class="hover:text-black transition-colors">Store</a>
+      <a routerLink="/products" class="hover:text-black transition-colors">iPhone</a>
+      <a routerLink="/products" class="hover:text-black transition-colors">Mac</a>
+      <a routerLink="/products" class="hover:text-black transition-colors">Watch</a>
+      <a routerLink="/products" class="hover:text-black transition-colors">Support</a>
+      <a routerLink="/cart" class="hover:text-black transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+      </a>
       <ng-container *ngIf="isLoggedIn()">
-        <a routerLink="/profile" class="nav-link">Account</a>
-        <a *ngIf="isAdmin()" routerLink="/admin" class="nav-link">Admin</a>
-        <a (click)="logout()" class="nav-link" style="cursor: pointer;">Logout</a>
+        <a *ngIf="isAdmin()" routerLink="/admin" class="hover:text-black transition-colors">Admin</a>
+        <a (click)="logout()" class="hover:text-black transition-colors cursor-pointer">Logout</a>
+      </ng-container>
+      <ng-container *ngIf="!isLoggedIn()">
+        <a routerLink="/login" class="hover:text-black transition-colors">Login</a>
       </ng-container>
     </nav>
   </div>

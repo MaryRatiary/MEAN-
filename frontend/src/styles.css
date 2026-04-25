@@ -1,4 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Global Styles - iOS 26 Inspired Minimalist Monochromatic */
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-apple border border-black/10;
+  }
+  
+  .glass-dark {
+    @apply bg-black/70 backdrop-blur-apple border border-white/10;
+  }
+}
+
 :root {
   --bg-primary: #FFFFFF;
   --bg-secondary: #F5F5f7; /* Apple's off-white */

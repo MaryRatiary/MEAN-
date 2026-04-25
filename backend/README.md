@@ -163,3 +163,7 @@ Toutes les réponses suivent ce format :
   ]
 }
 ```
+
+
+cd /home/mario-ratiarivony/MEAN-/backend
+node scripts/createAdmin.js

@@ -1,61 +1,100 @@
-<section class="container mt-4">
-  <div class="flex justify-between items-center mb-4">
-    <h2>Dashboard</h2>
-    <a (click)="logout()" class="nav-link" style="cursor: pointer; margin-left: 0;">Logout</a>
-  </div>
-
-  <div class="grid grid-cols-4 mb-4">
-    <div class="card">
-      <p style="font-size: 0.75rem; text-transform: uppercase;">Total Sales</p>
-      <h3 style="margin-bottom: 0;">{{ stats.totalSales | currency:'EUR' }}</h3>
-    </div>
-    <div class="card">
-      <p style="font-size: 0.75rem; text-transform: uppercase;">Orders</p>
-      <h3 style="margin-bottom: 0;">{{ stats.totalOrders }}</h3>
-    </div>
-    <div class="card">
-      <p style="font-size: 0.75rem; text-transform: uppercase;">Customers</p>
-      <h3 style="margin-bottom: 0;">{{ stats.totalUsers }}</h3>
-    </div>
-    <div class="card">
-      <p style="font-size: 0.75rem; text-transform: uppercase;">Products</p>
-      <h3 style="margin-bottom: 0;">{{ stats.totalProducts }}</h3>
-    </div>
-  </div>
-
-  <div class="grid grid-cols-2 mt-4">
-    <div class="card">
-      <h3>Recent Orders</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Customer</th>
-            <th>Total</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of stats.recentOrders">
-            <td style="font-size: 0.625rem;">{{ order._id }}</td>
-            <td>{{ order.user?.name }}</td>
-            <td>{{ order.totalPrice | currency:'EUR' }}</td>
-            <td>
-              <span class="badge" [style.background]="order.isPaid ? 'black' : '#eee'" [style.color]="order.isPaid ? 'white' : 'black'">
-                {{ order.isPaid ? 'Paid' : 'Pending' }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="flex min-h-screen bg-[#f5f5f7] pt-12">
+  <!-- Sidebar -->
+  <aside class="w-64 glass fixed h-full left-0 top-12 z-40 hidden md:flex flex-col p-6 space-y-8">
+    <div class="px-2">
+      <h2 class="text-[10px] font-bold text-black/40 uppercase tracking-[0.2em] mb-6">Menu Admin</h2>
+      <nav class="space-y-1">
+        <a class="flex items-center space-x-3 px-4 py-3 bg-black text-white rounded-2xl text-[13px] font-semibold transition-all shadow-lg shadow-black/20">
+          <span>Tableau de bord</span>
+        </a>
+        <a class="flex items-center space-x-3 px-4 py-3 text-black/60 hover:bg-black/5 rounded-2xl text-[13px] font-medium transition-all">
+          <span>Produits</span>
+        </a>
+        <a class="flex items-center space-x-3 px-4 py-3 text-black/60 hover:bg-black/5 rounded-2xl text-[13px] font-medium transition-all">
+          <span>Commandes</span>
+        </a>
+        <a class="flex items-center space-x-3 px-4 py-3 text-black/60 hover:bg-black/5 rounded-2xl text-[13px] font-medium transition-all">
+          <span>Clients</span>
+        </a>
+      </nav>
     </div>
 
-    <div class="card">
-      <div class="flex justify-between items-center mb-4">
-        <h3>Product Management</h3>
-        <button class="btn btn-black" style="padding: 0.5rem 1rem; font-size: 0.625rem;" (click)="addProduct()">Add Product</button>
+    <div class="mt-auto px-2">
+      <button (click)="logout()" class="w-full flex items-center space-x-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-2xl text-[13px] font-semibold transition-all">
+        <span>Se déconnecter</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 md:ml-64 p-8">
+    <div class="max-w-[1200px] mx-auto">
+      <header class="mb-12 flex justify-between items-end">
+        <div>
+          <p class="text-[10px] font-bold text-black/40 uppercase tracking-[0.2em] mb-2 px-1">Statistiques</p>
+          <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-black">Bonjour, Admin.</h1>
+        </div>
+        <div class="flex space-x-4">
+          <button (click)="addProduct()" class="bg-black text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-black/80 transition-all shadow-xl shadow-black/10">Ajouter un produit</button>
+        </div>
+      </header>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div class="bg-white rounded-[32px] p-8 border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 group">
+          <p class="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-3">Ventes totales</p>
+          <h3 class="text-3xl font-semibold text-black tracking-tight group-hover:scale-105 transition-transform origin-left">{{ stats.totalSales | currency:'EUR' }}</h3>
+        </div>
+        <div class="bg-white rounded-[32px] p-8 border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 group">
+          <p class="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-3">Commandes</p>
+          <h3 class="text-3xl font-semibold text-black tracking-tight group-hover:scale-105 transition-transform origin-left">{{ stats.totalOrders }}</h3>
+        </div>
+        <div class="bg-white rounded-[32px] p-8 border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 group">
+          <p class="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-3">Clients</p>
+          <h3 class="text-3xl font-semibold text-black tracking-tight group-hover:scale-105 transition-transform origin-left">{{ stats.totalUsers }}</h3>
+        </div>
+        <div class="bg-white rounded-[32px] p-8 border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 group">
+          <p class="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-3">Produits</p>
+          <h3 class="text-3xl font-semibold text-black tracking-tight group-hover:scale-105 transition-transform origin-left">{{ stats.totalProducts }}</h3>
+        </div>
       </div>
-      <app-product-list></app-product-list>
+
+      <!-- Recent Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 bg-white rounded-[40px] p-10 border border-black/5 shadow-sm">
+          <h3 class="text-2xl font-semibold mb-10 tracking-tight">Activités récentes</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-black/5">
+                  <th class="pb-6 text-[10px] font-bold text-black/40 uppercase tracking-widest px-2">ID Commande</th>
+                  <th class="pb-6 text-[10px] font-bold text-black/40 uppercase tracking-widest px-2">Client</th>
+                  <th class="pb-6 text-[10px] font-bold text-black/40 uppercase tracking-widest px-2">Total</th>
+                  <th class="pb-6 text-[10px] font-bold text-black/40 uppercase tracking-widest px-2">Statut</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-black/5">
+                <tr *ngFor="let order of stats.recentOrders" class="group hover:bg-[#fafafa] transition-colors rounded-3xl">
+                  <td class="py-6 px-2 text-xs font-mono text-black/40">{{ order._id.substring(0,10) }}...</td>
+                  <td class="py-6 px-2 text-sm font-semibold text-black/80">{{ order.user?.name }}</td>
+                  <td class="py-6 px-2 text-sm font-bold text-black">{{ order.totalPrice | currency:'EUR' }}</td>
+                  <td class="py-6 px-2">
+                    <span [class]="order.isPaid ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'" 
+                          class="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                      {{ order.isPaid ? 'Payé' : 'En attente' }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-[40px] p-10 border border-black/5 shadow-sm overflow-hidden">
+          <h3 class="text-2xl font-semibold mb-10 tracking-tight">Produits</h3>
+          <app-product-list></app-product-list>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </main>
+</div>

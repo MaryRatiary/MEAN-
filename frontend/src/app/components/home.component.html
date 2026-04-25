@@ -1,67 +1,72 @@
-<section class="hero">
-  <div class="container hero-wrap">
-
-    <div class="hero-text">
-      <span class="hero-badge">Boutique Apple Premium</span>
-
-      <h1>
-        Achetez la Nouvelle <br>
-        Collection iPhone
-      </h1>
-
-      <p class="hero-desc">
-        Découvrez la dernière génération d’iPhone avec un design élégant,
-        des appareils photo puissants, une grande autonomie et des performances haut de gamme.
-        Choisissez parmi les modèles iPhone Pro, Pro Max et versions classiques.
-      </p>
-
-      <div class="hero-features">
-        <div>✓ Livraison Rapide</div>
-        <div>✓ Paiement Sécurisé</div>
-        <div>✓ Qualité Officielle</div>
-        <div>✓ Garantie Incluse</div>
-      </div>
-
-      <div class="hero-actions">
-        <a routerLink="/products" class="btn btn-black">Acheter iPhone</a>
-        <a routerLink="/products" class="btn btn-light">Voir la Collection</a>
-      </div>
-
-      <div class="hero-stats">
-        <div>
-          <h3>12K+</h3>
-          <p>Clients Satisfaits</p>
-        </div>
-
-        <div>
-          <h3>50+</h3>
-          <p>Modèles Disponibles</p>
-        </div>
-
-        <div>
-          <h3>24H</h3>
-          <p>Expédition Rapide</p>
-        </div>
+<main class="w-full">
+  <!-- Section 1: iPhone 15 Pro -->
+  <section class="h-screen w-full flex flex-col items-center justify-center pt-24 relative overflow-hidden bg-white">
+    <div class="text-center z-10 fade-in px-4">
+      <h1 class="text-5xl md:text-7xl font-semibold tracking-tight text-black">iPhone 15 Pro</h1>
+      <p class="text-xl md:text-2xl mt-4 font-normal text-black/60">Titane. Tellement puissant. Tellement léger.</p>
+      <div class="mt-8 flex space-x-8 justify-center items-center">
+        <a routerLink="/products" class="text-blue-600 hover:underline text-xl font-medium tracking-tight">En savoir plus ></a>
+        <a routerLink="/products" class="text-blue-600 hover:underline text-xl font-medium tracking-tight">Acheter ></a>
       </div>
     </div>
-
-    <div class="hero-images">
-
-      <div class="phone-card large">
-        <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=900" alt="iPhone">
-      </div>
-
-      <div class="small-grid">
-        <div class="phone-card">
-          <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800" alt="iPhone">
-        </div>
-
-        <div class="phone-card">
-          <img src="https://images.unsplash.com/photo-1603898037225-1c1d5a4b2f90?w=800" alt="iPhone">
-        </div>
-      </div>
-
+    <div class="mt-12 w-full max-w-[1000px] h-full relative flex justify-center items-end">
+      <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=2070&auto=format&fit=crop" 
+           class="object-contain h-[70%] md:h-[80%] hover:scale-105 transition-transform duration-1000 ease-out" 
+           alt="iPhone 15 Pro">
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- Section 2: iPhone 15 -->
+  <section class="h-screen w-full flex flex-col items-center justify-center pt-24 relative overflow-hidden bg-[#fafafa]">
+    <div class="text-center z-10 fade-in px-4">
+      <h1 class="text-5xl md:text-7xl font-semibold tracking-tight text-black">iPhone 15</h1>
+      <p class="text-xl md:text-2xl mt-4 font-normal text-black/60">Nouvel appareil photo. Nouveau design. Tout nouveau.</p>
+      <div class="mt-8 flex space-x-8 justify-center items-center">
+        <a routerLink="/products" class="text-blue-600 hover:underline text-xl font-medium tracking-tight">En savoir plus ></a>
+        <a routerLink="/products" class="text-blue-600 hover:underline text-xl font-medium tracking-tight">Acheter ></a>
+      </div>
+    </div>
+    <div class="mt-12 w-full max-w-[1000px] h-full relative flex justify-center items-end">
+      <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=2070&auto=format&fit=crop" 
+           class="object-contain h-[70%] md:h-[80%] hover:scale-105 transition-transform duration-1000 ease-out" 
+           alt="iPhone 15">
+    </div>
+  </section>
+
+  <!-- Section 3: MacBook Pro -->
+  <section class="h-screen w-full flex flex-col items-center justify-center pt-24 relative overflow-hidden bg-black">
+    <div class="text-center z-10 fade-in px-4">
+      <h1 class="text-5xl md:text-7xl font-semibold tracking-tight text-white">MacBook Pro</h1>
+      <p class="text-xl md:text-2xl mt-4 font-normal text-white/70">M3. M3 Pro. M3 Max. Des monstres de puissance.</p>
+      <div class="mt-8 flex space-x-8 justify-center items-center">
+        <a routerLink="/products" class="text-blue-500 hover:underline text-xl font-medium tracking-tight">En savoir plus ></a>
+        <a routerLink="/products" class="text-blue-500 hover:underline text-xl font-medium tracking-tight">Acheter ></a>
+      </div>
+    </div>
+    <div class="mt-12 w-full max-w-[1000px] h-full relative flex justify-center items-end">
+      <img src="https://images.unsplash.com/photo-1517336714460-d1396cc710d7?q=80&w=2070&auto=format&fit=crop" 
+           class="object-contain h-[70%] md:h-[80%] hover:scale-105 transition-transform duration-1000 ease-out" 
+           alt="MacBook Pro">
+    </div>
+  </section>
+
+  <!-- Section 4: Grid (iPad / Watch) -->
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-white">
+    <!-- iPad Pro -->
+    <div class="h-[600px] bg-[#fafafa] flex flex-col items-center justify-center relative overflow-hidden rounded-3xl">
+      <div class="text-center z-10 p-12">
+        <h2 class="text-4xl font-semibold tracking-tight">iPad Pro</h2>
+        <p class="text-lg mt-2 text-black/60">Incroyablement fin. Prodigieusement puissant.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1544244015-0cd4b3fe6550?q=80&w=2000" class="object-contain h-[60%] mt-4" alt="iPad Pro">
+    </div>
+    <!-- Apple Watch -->
+    <div class="h-[600px] bg-black flex flex-col items-center justify-center relative overflow-hidden rounded-3xl">
+      <div class="text-center z-10 p-12 text-white">
+        <h2 class="text-4xl font-semibold tracking-tight">Watch</h2>
+        <p class="text-lg mt-2 text-white/70">Plus intelligente. Plus lumineuse. Plus puissante.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1434493907317-a46b53b81882?q=80&w=2000" class="object-contain h-[60%] mt-4" alt="Watch">
+    </div>
+  </section>
+</main>
